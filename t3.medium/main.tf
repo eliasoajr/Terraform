@@ -64,7 +64,7 @@ locals {
 
 resource "aws_instance" "Rancher01" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.midium"
+  instance_type = "t3.medium"
   security_groups = ["Tomcat - Backend"]
   key_name = "Rancher_01"
   tags = {
@@ -74,7 +74,7 @@ resource "aws_instance" "Rancher01" {
 
 resource "aws_instance" "kube01" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.midium"
+  instance_type = "t3.medium"
   security_groups = ["Tomcat - Backend"]
   key_name = "Kubernets_03"
 
@@ -85,7 +85,7 @@ resource "aws_instance" "kube01" {
 
 resource "aws_instance" "kube02" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.midium"
+  instance_type = "t3.medium"
   security_groups = ["Tomcat - Backend"]
   key_name = "Kubernets_02"
 
@@ -96,7 +96,7 @@ resource "aws_instance" "kube02" {
 
 resource "aws_instance" "kube03" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3midium"
+  instance_type = "t3.medium"
   security_groups = ["Tomcat - Backend"]
   key_name = "Kubernets_03"
 
