@@ -13,8 +13,17 @@ provider "aws" {
 }
 
 # Create a VPC
-resource "aws_vpc" "Lab-AppTest" {
-  cidr_block = "172.31.0.0/16"
+resource "aws_vpc" "Lab-k8s" {
+  cidr_block = "172.16.0.0/16"
+  tags = {
+    Name = "Lab-k8s"
+  }
+}
+
+resource "aws_subnet" "my_subnet" {
+  vpc_id            = "Lab-k8s"
+  cidr_block        = "172.16.0.0/16"
+  #availability_zone = "us-east-2"
 }
 
 resource "aws_security_group" "allow_tls" {
@@ -59,14 +68,14 @@ data "aws_ami" "ubuntu" {
 }
 
 locals {
-  vpc_id = "vpc-2c3c9c47"
+  vpc_id = "Lab-k8s"
 }
 
 resource "aws_instance" "Rancher01" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.medium"
-  security_groups = ["Tomcat - Backend"]
-  key_name = "Rancher_01"
+  #security_groups = ["Tomcat - Backend"]
+  key_name = "k8s"
   tags = {
     Name = "Rancher"
   }
@@ -75,8 +84,8 @@ resource "aws_instance" "Rancher01" {
 resource "aws_instance" "kube01" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.medium"
-  security_groups = ["Tomcat - Backend"]
-  key_name = "Kubernets_03"
+  #security_groups = ["Tomcat - Backend"]
+  key_name = "k8s"
 
   tags = {
     Name = "k8s01"
@@ -86,8 +95,8 @@ resource "aws_instance" "kube01" {
 resource "aws_instance" "kube02" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.medium"
-  security_groups = ["Tomcat - Backend"]
-  key_name = "Kubernets_02"
+  #security_groups = ["Tomcat - Backend"]
+  key_name = "k8s"
 
   tags = {
     Name = "k8s02"
@@ -97,8 +106,8 @@ resource "aws_instance" "kube02" {
 resource "aws_instance" "kube03" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.medium"
-  security_groups = ["Tomcat - Backend"]
-  key_name = "Kubernets_03"
+  #security_groups = ["Tomcat - Backend"]
+  key_name = "k8s"
 
   tags = {
     Name = "k8s03"
